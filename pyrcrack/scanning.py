@@ -185,6 +185,9 @@ class Airodump(Air):
             file_enum = enumerate(file_)
             num = 0
             for num, line in file_enum:
+                line = line.replace('\0', '')
+                if not line:
+                    continue
                 if line.startswith('BSSID'):
                     continue
                 if line.startswith('Station'):
@@ -200,6 +203,5 @@ class Airodump(Air):
                 Strip each line of its extra blank spaces
             """
             return [[a.strip() for a in row] for row in reader if row]
-
         self._aps = clean_rows(csv.reader(StringIO('\n'.join(aps))))
         self._clients = clean_rows(csv.reader(StringIO('\n'.join(clis))))

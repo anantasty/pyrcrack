@@ -22,6 +22,7 @@ class Aireplay(Air):
         ('b', False),
         ('d', False),
         ('s', False),
+        ('e', False),
         ('m', False),
         ('n', False),
         ('u', False),
@@ -72,7 +73,7 @@ class Aireplay(Air):
         with suppress(AttributeError):
             extra = getattr(self, "_allowed_arguments_{}".format(attack))
         self._allowed_arguments = self._allowed_arguments + \
-            extra + (attack, False),
+            extra + ((attack, False),)
         kwargs[attack] = True
         super(self.__class__, self).__init__(**kwargs)
 
